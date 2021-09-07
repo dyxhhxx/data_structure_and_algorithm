@@ -5,6 +5,8 @@ import com.sun.security.jgss.GSSUtil;
 import java.util.Scanner;
 
 public class testArrayQueue {
+
+    //这种方法最终会出现输入g显示队列为空，输入a显示队列已满。因为指针front和rear向前移动后，前面的位置就无法再次利用
     public static void main(String[] args) {
         //创建一个队列
         ArrayQueue queue=new ArrayQueue(3);
@@ -87,7 +89,7 @@ class ArrayQueue{
             System.out.println("队列已满");
             return;
         }
-        else{arr[++front]=n;}
+        else{arr[++rear]=n;}
     }
 
     //从数组头部取出一个元素 get
@@ -97,7 +99,8 @@ class ArrayQueue{
             throw new RuntimeException("队列空，无法取出数据");
         }
         else{
-            int res=arr[++rear];
+            int res=arr[++front];
+            arr[front]=0;
             return res;
         }
     }
@@ -108,7 +111,7 @@ class ArrayQueue{
             throw new RuntimeException("队列空，无法查看队列头部数据");
         }
         else{
-            int res=arr[++front];
+            int res=arr[front+1];
             return res;
         }
     }
