@@ -37,6 +37,9 @@ public class SingleLinkedListDemo {
         System.out.printf("该链表的长度为%d个节点\n",sll.getLength());
         System.out.printf("该链表的长度为%d个节点\n",sll1.getLength());
 
+        //查找倒数第二个节点
+        System.out.println(sll.findLastIndexNode(1));
+
 
     }
 }
@@ -171,6 +174,19 @@ class SingleLickedList{
             temp=temp.next;
         }
         return sum;
+    }
+
+    //查找单链表中倒数第k个节点
+    public HeroNode findLastIndexNode(int k){
+        int size=getLength();
+        if(k<=0||k>size){
+            return null;
+        }
+        HeroNode temp=head.next;
+        for(int i=0;i<size-k;i++){
+            temp=temp.next;
+        }
+        return temp;
     }
 }
 
