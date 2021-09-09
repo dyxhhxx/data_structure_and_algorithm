@@ -40,6 +40,11 @@ public class SingleLinkedListDemo {
         //查找倒数第二个节点
         System.out.println(sll.findLastIndexNode(1));
 
+        //链表倒序
+        sll.reverseList();
+        System.out.println("倒序后的链表是：");
+        sll.list();
+
 
     }
 }
@@ -187,6 +192,27 @@ class SingleLickedList{
             temp=temp.next;
         }
         return temp;
+    }
+
+    //链表倒序
+    public void reverseList(){
+        //判断链表是否为空，或链表是否只有一个节点
+        if(head.next==null||head.next.next==null){
+            System.out.print("链表为空，或链表只有一个节点");
+            return;
+        }
+        //准备工作
+        HeroNode temp=head.next;
+        HeroNode next=null;
+        HeroNode reversehead=new HeroNode(0,"","");
+        //开始反转
+        while(temp!=null){
+            next=temp.next;
+            temp.next=reversehead.next;
+            reversehead.next=temp;
+            temp=next;
+        }
+        head.next=reversehead.next;
     }
 }
 
