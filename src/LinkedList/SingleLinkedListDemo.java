@@ -1,14 +1,16 @@
 package LinkedList;
 
 import java.text.ParseException;
+import java.util.Stack;
 
 public class SingleLinkedListDemo {
+
     public static void main(String[] args) {
         //先创建节点
         HeroNode hero1=new HeroNode(1,"宋江","及时雨");
-        HeroNode hero2=new HeroNode(2,"卢俊义","玉麒麟");
-        HeroNode hero3=new HeroNode(3,"吴用","智多星");
-        HeroNode hero4=new HeroNode(4,"林冲","豹子头");
+        HeroNode hero2=new HeroNode(3,"卢俊义","玉麒麟");
+        HeroNode hero3=new HeroNode(6,"吴用","智多星");
+        HeroNode hero4=new HeroNode(9,"林冲","豹子头");
         //创建链表
         SingleLickedList sll=new SingleLickedList();
         //将四个节点加入链表
@@ -26,33 +28,60 @@ public class SingleLinkedListDemo {
         //删除节点
         SingleLickedList sll1=new SingleLickedList();
         sll1.deleteNode(1);
-        sll.deleteNode(5);
-        sll.deleteNode(1);
-//        sll.deleteNode(2);
-//        sll.deleteNode(3);
-//        sll.deleteNode(4);
-        System.out.println("删除节点后的链表是：");
-        sll.list();
+//        sll.deleteNode(5);
+////        sll.deleteNode(1);
+////        sll.deleteNode(2);
+////        sll.deleteNode(3);
+////        sll.deleteNode(4);
+//        System.out.println("删除节点后的链表是：");
+//        sll.list();
         //链表长度（节点个数）
-        System.out.printf("该链表的长度为%d个节点\n",sll.getLength());
-        System.out.printf("该链表的长度为%d个节点\n",sll1.getLength());
+        System.out.printf("链表sll的长度为%d个节点\n",sll.getLength());
+        System.out.printf("链表sll1的长度为%d个节点\n",sll1.getLength());
 
         //查找倒数第二个节点
-        System.out.println(sll.findLastIndexNode(1));
+        System.out.println("查找倒数第2个节点为：");
+        System.out.println(sll.findLastIndexNode(2));
 
         //链表倒序
         sll.reverseList();
         System.out.println("倒序后的链表是：");
         sll.list();
 
+        //反向打印
+        System.out.println("利用从尾遍历反向打印的结果是：");
+        sll.reverseErgitoc();
+        System.out.println("利用Stack栈反向打印的结果是：");
+        sll.reverseByStack();
+
+        //新建两个简单的链表，并将其合并
+        HeroNode hero5=new HeroNode(0,"","");
+        HeroNode hero6=new HeroNode(5,"","");
+        HeroNode hero7=new HeroNode(6,"","");
+        HeroNode hero8=new HeroNode(8,"","");
+        HeroNode hero9=new HeroNode(10,"","");
+        SingleLickedList sll2=new SingleLickedList();
+        sll2.addNode(hero5);
+        sll2.addNode(hero6);
+        sll2.addNode(hero7);
+        sll2.addNode(hero8);
+        sll2.addNode(hero9);
+        System.out.println("新建的链表是：");
+        sll2.list();
+        sll.reverseList();
+        sll.combineList(sll2);
+        System.out.println("合并后的链表是：");
+        sll.list();
+
 
     }
+
 }
 
 //定义SingleLickedList,管理英雄
 class SingleLickedList{
     //先初始化一个头节点，头节点不动，不存放具体数据
-    private HeroNode head=new HeroNode(0,"","");
+    public HeroNode head=new HeroNode(0,"","");
 
     //在链表末尾添加新节点
     public void addNode(HeroNode heroNode){
@@ -213,6 +242,67 @@ class SingleLickedList{
             temp=next;
         }
         head.next=reversehead.next;
+    }
+
+    //从尾到头打印单链表（要求：方式1：反向遍历；2：Stack栈）
+    //方式1：反向遍历
+    public void reverseErgitoc(){
+        if(getLength()==0){
+            System.out.println("链表为空");
+            return;
+        }
+       for(int i=1;i<=getLength();i++){
+           System.out.println(findLastIndexNode(i));
+       }
+    }
+    //方式2：Stack栈
+    public void reverseByStack(){
+        if(head.next==null){
+            System.out.println("链表为空");
+            return;
+        }
+        Stack<HeroNode> stack=new Stack();
+        HeroNode temp=head.next;
+        while(true){
+            if(temp==null){
+                break;
+            }
+            stack.add(temp);
+            temp=temp.next;
+        }
+        while(stack.size()>0){
+            System.out.println(stack.pop());
+        }
+    }
+
+    //合并两个有序的单链表，合并之后的链表依然有序
+    public void combineList(SingleLickedList l){
+        HeroNode temp2=l.head.next;
+        HeroNode temp1=head;
+        HeroNode next=null;
+        while(temp2!=null){
+            //操作temp1，找到插入位置
+            while(true) {
+                if(temp1.next==null){
+                    break;
+                }
+                if (temp2.no <= temp1.next.no) {
+                    break;
+                }
+                temp1 = temp1.next;
+            }
+            //操作temp2，将temp2节点插入定位的位置，并继续向后移动
+            if(temp1.next!=null&&temp2.no==temp1.next.no){  //如果链表2最后的数据编号是最大的，原来的链表就会遍历到最后一个，它的next指针为null
+                System.out.printf("新链表的编号%d重复，不予合并，",temp2.no);
+                temp2=temp2.next;
+            }
+            else {
+                next = temp2.next;
+                temp2.next = temp1.next;
+                temp1.next = temp2;
+                temp2 = next;
+            }
+        }
     }
 }
 
