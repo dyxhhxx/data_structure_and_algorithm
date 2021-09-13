@@ -9,24 +9,24 @@ public class CircleSingleLinkedListDemo {
 
     public static void main(String[] args) {
         CircleSingleLinkedList cssl=new CircleSingleLinkedList();
-        cssl.addNode(5);
-        cssl.showList();
-        System.out.printf("小孩个数是：%d\n",cssl.getSize());
-        System.out.println("出圈顺序：");
-        cssl.JosephuMethod(2,2);
+//        cssl.addNode(5);
+//        cssl.showList();
+//        System.out.printf("小孩个数是：%d\n",cssl.getSize());
+//        System.out.println("出圈顺序：");
+//        cssl.JosephuMethod(1,2);
 
-//        Scanner s=new Scanner(System.in);
-//        System.out.println("请输入小孩个数：");
-//        int size=s.nextInt();
-//        System.out.println("请输入开始位置：");
-//        int start=s.nextInt();
-//        System.out.println("请输入报数个数：");
-//        int length=s.nextInt();
-//        CircleSingleLinkedList cssl1=new CircleSingleLinkedList();
-//        cssl1.addNode(size);
-//        cssl1.showList();
-//        System.out.println("---------Josephu----------");
-//        cssl1.JosephuMethod(start,length);
+        Scanner s=new Scanner(System.in);
+        System.out.println("请输入小孩个数：");
+        int size=s.nextInt();
+        System.out.println("请输入开始位置：");
+        int start=s.nextInt();
+        System.out.println("请输入报数个数：");
+        int length=s.nextInt();
+        CircleSingleLinkedList cssl1=new CircleSingleLinkedList();
+        cssl1.addNode(size);
+        cssl1.showList();
+        System.out.println("---------Josephu----------");
+        cssl1.JosephuMethod(start,length);
 
     }
 }
@@ -91,7 +91,7 @@ class CircleSingleLinkedList{
 
     //Josephu出圈方法
     public void JosephuMethod(int start,int length){
-        if(getSize()==0||start>getSize()||start<1){
+        if(first==null||start>getSize()||start<1){
             System.out.println("开始位置不在正常范围内，请重新设置start位置");
             return;
         }
@@ -104,25 +104,26 @@ class CircleSingleLinkedList{
             temp=temp.next;
         }
         //start=1时temp不需要移动
+        //temp移动时，可以让first也移动，这样链表可以在之后继续操作，但如果只是满足Josephu出圈，只用first前但temp就好
         if(start>1) {
             for (int i = 2; i <= start; i++) {
                 temp = temp.next;
-                first=first.next;
+//                first=first.next;
             }
         }
         while(true){
-            if(getSize()==1){
+            if(temp.next==temp.next.next){
                 System.out.println(temp.no);
                 break;
             }
             //让temp向后移动length-1的位置
             for(int i=0;i<length-1;i++){
                 temp=temp.next;
-                first=first.next;
+//                first=first.next;
             }
             //找出temp下一个位置的no，并使其出链表
-            System.out.println(first.no);
-            first=first.next;
+            System.out.println(temp.next.no);
+//            first=first.next;
             temp.next=temp.next.next;
         }
     }
