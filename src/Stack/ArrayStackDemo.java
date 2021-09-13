@@ -46,6 +46,7 @@ public class ArrayStackDemo {
     }
 }
 
+//用数组模拟栈
 class ArrayStack{
     private int top=-1;
     private int[] stack;
@@ -78,7 +79,7 @@ class ArrayStack{
     }
 
     //出栈
-    public int pop(){
+    public int pop() throws RuntimeException{
         if(isEmpty()){
             throw new RuntimeException("栈已空");
         }
@@ -98,7 +99,6 @@ class ArrayStack{
             System.out.println("stack["+i+"]="+stack[i]);
         }
     }
-
-
-
 }
+
+
