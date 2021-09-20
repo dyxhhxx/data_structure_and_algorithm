@@ -16,7 +16,23 @@ public class Calculator {
             char c=expression.substring(index,index+1).charAt(0);
             //如果是数，直接入数栈
             if(!operStack.isOper(c)){
-                numStack.push(c-48);
+//                numStack.push(c-48);
+                //但上一句仍存在问题，如果是个多位数就会计算出错
+                //因此需要判断当前index的下一位是否是数组，如果是就继续拼接，最后将完整数字push入栈
+                String finalc = "" + c;
+                while (true) {
+                    //首先判断index是否已经遍历到最后，否则index+1超出范围会报错
+                    if(index==expression.length()-1){
+                        break;
+                    }
+                    //判断下一位如果是操作符就跳出循环，否则就遍历到下一位并拼接到字符串后面
+                    if(operStack.isOper(expression.substring(index+1, index + 2).charAt(0))) {
+                        break;
+                    }
+                    index++;
+                    finalc += expression.substring(index, index + 1).charAt(0);
+                }
+                numStack.push(Integer.parseInt(finalc));
             }
             //如果是符号
             else{
