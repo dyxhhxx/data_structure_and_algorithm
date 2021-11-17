@@ -37,6 +37,10 @@ public class Calculator {
             }
             //如果是符号
             else{
+                //解决首位是符号的问题
+                if(index==0){
+                    numStack.push(0);
+                }
                 //如果符号栈为空，就直接入符号栈
                 if(operStack.isEmpty()){
                     operStack.push(c);
