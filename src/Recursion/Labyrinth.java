@@ -33,6 +33,14 @@ public class Labyrinth {
                 }
                 System.out.println();
             }
+        }else{
+            System.out.println("没有通路！");
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 7; j++) {
+                    System.out.print(map[i][j] + " ");
+                }
+                System.out.println();
+            }
         }
     }
 
@@ -47,11 +55,14 @@ public class Labyrinth {
                 map[i][j] = 2;
                 if (findPath(map, i + 1, j)) {  //下
                     return true;
-                }  if (findPath(map, i, j + 1)) {  //右 上
+                }
+                if (findPath(map, i, j - 1)) {  //右 上
                     return true;
-                }  if (findPath(map, i-1 , j)) {  //上 右
+                }
+                if (findPath(map, i, j + 1)) {  //上 右
                     return true;
-                }  if (findPath(map, i, j -   1)) {  //左
+                }
+                if (findPath(map, i - 1, j)) {  //左
                     return true;
                 } else {  //下、右、上、左都走不通，说明该点是死路，置为3
                     map[i][j] = 3;
