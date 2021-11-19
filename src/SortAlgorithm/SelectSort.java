@@ -23,7 +23,6 @@ public class SelectSort {
     public static void Select2(int[] numarr) {
         int index;
         int num;
-        int x;
         for (int i = 0; i < numarr.length; i++) {
             index = i;
             num = numarr[i];
@@ -34,9 +33,10 @@ public class SelectSort {
                 }
             }
             //将index处的元素与i处的元素交换
-            x = numarr[index];
-            numarr[index] = numarr[i];
-            numarr[i] = x;
+            if (index != i) {
+                numarr[index] = numarr[i];
+                numarr[i] = num;
+            }
         }
     }
 
