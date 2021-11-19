@@ -19,7 +19,7 @@ public class SelectSort {
     }
 
     //选择排序2，从头至尾找到最小元素的大小和下表，然后和头部元素交换
-    //同样80000个数据，借助index遍历的方法（1000+ms），比直接交换的方法（7000+ms）节省大量时间
+    //同样80000个数据，借助index遍历的方法（1000+ms），比直接交换的方法（7000+ms）节省大量时间(Bubble用时8000+ms）
     public static void Select2(int[] numarr) {
         int index;
         int num;
