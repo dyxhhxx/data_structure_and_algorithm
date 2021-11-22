@@ -37,8 +37,8 @@ public class RadixSort {
                 if(arr[i]/digit!=0){
                     flag=true;
                 }
-//                int num=arr[i]%digit-arr[i]%(digit/10);
-                bucket[arr[i]%digit/(digit/10)][count[arr[i]%digit/(digit/10)]]=arr[i];
+//                int num=arr[i]%digit-arr[i]%(digit/10);     //也可以写成arr[i]/(digit/10)%10
+                bucket[arr[i]%digit/(digit/10)][count[arr[i]%digit/(digit/10)]]=arr[i];  
                 count[arr[i]%digit/(digit/10)]++;
             }
             //再按照桶的顺序将元素放回原数组
