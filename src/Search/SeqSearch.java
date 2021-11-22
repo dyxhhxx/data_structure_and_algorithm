@@ -6,7 +6,7 @@ public class SeqSearch {
     public static void main(String[] args) {
         int[] arr = new int[20];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = (int) (Math.random() * 30);
+            arr[i] = (int) (Math.random() * 16);
         }
         System.out.println(Arrays.toString(arr));
         int index = seqSearch(arr, 15);
@@ -29,13 +29,14 @@ public class SeqSearch {
         return -1;
     }
 
-    //打印出多个目标元素
+    //打印出多个目标元素,也可借助数组，将所有找到的下表放在一个数组中
     public static void seqSearch1(int[] arr, int val) {
         boolean flag = false;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == val) {
                 flag = true;
                 System.out.println("该随机数组中值为15的元素在第" + i + "位");
+//                return;  //只找第一个就加一个return
             }
         }
         if (!flag) {
