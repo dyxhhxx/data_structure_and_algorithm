@@ -6,11 +6,12 @@ import java.util.List;
 
 public class BinarySearch {
     static int index=-1;
+    static int count;
     public static void main(String[] args) {
-//        int[] arr=new int[20];
-//        for(int i=0;i<arr.length;i++){
-//            arr[i]=i;
-//        }
+        int[] arr=new int[100];
+        for(int i=0;i<arr.length;i++){
+            arr[i]=i;
+        }
 //        System.out.println(Arrays.toString(arr));
 //        int index=binarySearch1(arr,0,arr.length-1,4);
 //        if (index == -1) {
@@ -19,11 +20,12 @@ public class BinarySearch {
 //            System.out.println("该随机数组中第一个值为15的元素在第" + index + "位");
 //        }
         int[] arr1={1,2,3,3,4,5};
-        List<Integer> intlist=binarySearchPro(arr1,0,arr1.length-1,3);
+        List<Integer> intlist=binarySearchPro1(arr,0,arr1.length-1,15);
         Integer[] res= intlist.toArray(new Integer[intlist.size()]);
         Object[] res1=intlist.toArray();
         System.out.println(Arrays.toString(res));
         System.out.println(Arrays.toString(res1));
+        System.out.println(count);
     }
 
     //二分查找的对象，必须是一个有序数组
@@ -60,11 +62,12 @@ public class BinarySearch {
             if(arr[mid]<val){
                 return binarySearch1(arr,mid+1,right,val);
             }
-            if(arr[mid]>val){
+            else{
                 return binarySearch1(arr,left,mid-1,val);
             }
+        }else {
+            return -1;
         }
-        return -1;
     }
 
     //目标数组中有多个目标元素时的二分查找方法
@@ -97,6 +100,7 @@ public class BinarySearch {
 
     }
     public static List<Integer> binarySearchPro1(int[] arr,int left,int right,int val){
+        count++;
         if(left>right){
             return new ArrayList<Integer>();
         }
