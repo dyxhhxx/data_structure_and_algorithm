@@ -1,4 +1,5 @@
-import java.sql.SQLOutput;
+package HashTable;
+
 import java.util.Scanner;
 
 public class HashTabDemo {
@@ -58,7 +59,7 @@ class Emp{
 
     @Override
     public String toString() {
-        return "Emp{" +
+        return "HashTable.Emp{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", next=" + next +
@@ -104,25 +105,21 @@ class EmpLinkedList{
         System.out.println();
     }
     //根据id查找雇员
-    public Emp findEmp(int id){
+    public void findEmp(int id){
         if(head==null){
-            throw new RuntimeException("链表为空");
+            System.out.println("链表为空");
         }
         Emp temp=head;
-        boolean flag=false;
         while(true){
-            if(temp==null||temp.id==id){
-                if(temp.id==id){
-                    flag=true;
-                }
+            if(temp.id==id){
+                System.out.printf("编号为%d的员工姓名是%s\n",temp.id,temp.name);
+                break;
+            }
+            if(temp.next==null){
+                System.out.printf("没有找到编号为%d的员工\n",id);
                 break;
             }
             temp=temp.next;
-        }
-        if(flag){
-            return temp;
-        }else{
-            throw new RuntimeException("该链表中不存在编号为"+id+"的员工");
         }
     }
 }
@@ -147,10 +144,9 @@ class HashTab{
     }
 
     //根据输入的id查找雇员
-    public Emp findEmp(int id){
+    public void findEmp(int id){
         int no=hashFan(id);
-        Emp res=EmpLinkedListArr[no].findEmp(id);
-        return res;
+        EmpLinkedListArr[no].findEmp(id);
     }
 
     //遍历链表
