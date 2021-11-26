@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class FibonacciSearch {
     public static void main(String[] args) {
         int[] arr = {1, 2, 4, 55, 66, 190};
-        System.out.println(fibonacciSearch(arr, 8));
+        System.out.println(fibonacciSearch(arr, 1));
 
     }
 
