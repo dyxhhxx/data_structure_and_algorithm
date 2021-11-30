@@ -71,7 +71,7 @@ class Emp{
 class EmpLinkedList{
     private Emp head;
 
-    //添加雇员到链表
+    //添加雇员到链表，id从大到小
     public void addEmp(Emp emp){
         if(head==null){
             head=emp;
@@ -79,13 +79,26 @@ class EmpLinkedList{
         }
         //借助辅助指针遍历到最后一个节点
         Emp temp=head;
+        boolean flag=false;
         while(true){
             if(temp.next==null){
                 break;
             }
+            if(emp.id<temp.next.id){
+                flag=true;
+                break;
+            }
             temp=temp.next;
         }
-        temp.next=emp;
+        if(!flag) {
+            //链表现有的最后一个节点id都小于新员工的id，可以直接插在后面
+            temp.next = emp;
+        }else{
+            //temp已经定位到新员工要插入的前一个位置
+            Emp x=temp.next;
+            temp.next=emp;
+            temp.next.next=x;
+        }
     }
 
     //遍历链表到雇员信息
