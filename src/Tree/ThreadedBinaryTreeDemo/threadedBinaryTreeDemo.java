@@ -104,7 +104,6 @@ class ThreadedBinaryTree{
             //此时当前节点的右指针指向的不一定是后继节点（type不为1，可能是，也可能不是），需要手动向下遍历，然后下一个循环重新找真正的后续节点
             node=node.getRight();
         }
-
     }
 
     //前序线索化
