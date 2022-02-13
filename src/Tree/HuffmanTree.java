@@ -38,7 +38,7 @@ public class HuffmanTree {
             //不能通过index的方法删除节点，因为remove方法会使节点向前移动，此时删除的index=1的节点，实际上是index=2的节点
 //            nodes.remove(0);
 //            nodes.remove(1);
-            //可以通过制定对象的方法删除节点
+            //可以通过指定n对象的方法删除节点
             nodes.remove(left);
             nodes.remove(right);
         }
