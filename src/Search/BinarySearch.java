@@ -108,7 +108,7 @@ public class BinarySearch {
         if(val>arr[mid]){
             return binarySearchPro1(arr,mid+1,right,val);
         }
-        if(val<arr[mid]){
+        else if(val<arr[mid]){
             return binarySearchPro1(arr,left,mid-1,val);
         }else{
             List<Integer> intlist=new ArrayList<>();
