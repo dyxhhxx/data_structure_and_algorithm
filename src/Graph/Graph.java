@@ -2,6 +2,7 @@ package Graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Graph {
 
@@ -77,6 +78,35 @@ public class Graph {
         for(int i=0;i<vertexList.size();i++){
             if(!isVisited[i]){
                 dfs(isVisited,i);
+            }
+        }
+    }
+
+    //对一个节点进行广度优先遍历的算法bfs
+    public void bfs(boolean[] isVisited,int i){
+        int u;  //表示头节点对应的下标
+        int w;  //邻接节点w
+        //用队列记录节点访问的顺序
+        LinkedList<Integer> queue = new LinkedList<>();
+        System.out.println(getValueByIndex(i)+"->");
+        isVisited[i]=true;
+        queue.addLast(i);
+
+        while(!queue.isEmpty()){
+            //取出队列的头节点下标
+            u = (Integer) queue.removeFirst();
+            //得到第一个邻接节点的下标
+            w = getFirstNeighbor(u);
+            while (w!=-1){  //将u的所有邻接节点放进队列
+                if(!isVisited[w]){
+                    System.out.println(getValueByIndex(w)+"->");
+                    //标记已经访问
+                    isVisited[w]=true;
+                    //入队
+                    queue.addLast(w);
+                }
+                //以u为前驱节点，找w后面的下一个邻接节点
+                w=getNextNeighbor(u,w);  //真正体现广度优先
             }
         }
     }
