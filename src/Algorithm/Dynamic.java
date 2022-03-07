@@ -12,6 +12,7 @@ public class Dynamic {
         int m=4;  //背包容量
         int n=w.length;  //物品数量
         int[][] v=new int[n+1][m+1];  //v[i][j]表示在前i个物品中能够装入容量为j的背包中的最大价值
+        int[][] path=new int[n+1][m+1];  //记录商品放入情况
 
         //初始化v的第一行和第一列
         for(int i=0;i<v.length;i++){
@@ -29,13 +30,34 @@ public class Dynamic {
                 }else{  //可以放进去时，开始比较
                     int temp=val[i-1]+v[i-1][j-w[i-1]];  //放入当前物品
                     int ori=v[i-1][j];
-                    v[i][j]=(temp>ori)?temp:ori;
+//                    v[i][j]=Math.max(temp,ori);
+                    //为了将放置结果记录在path中，需要用一个if-else判断
+                    if(temp>ori){
+                        v[i][j]=temp;
+                        path[i][j]=1;
+                    }else{
+                        v[i][j]=ori;
+                    }
                 }
             }
         }
 
         for(int[] arr:v){
             System.out.println(Arrays.toString(arr));
+        }
+//        System.out.println();
+//        for(int[] arr:path){
+//            System.out.println(Arrays.toString(arr));
+//        }
+
+        int i=path.length-1; //最大行下标,即第几个物品
+        int j=path[0].length-1; //最大列下标，即当前背包重量
+        while(i>0&&j>0){
+            if(path[i][j]==1){
+                System.out.printf("第%d个商品放进背包\n",i);
+                j-=w[i-1];
+            }
+            i--;
         }
 
     }
